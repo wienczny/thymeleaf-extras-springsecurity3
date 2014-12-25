@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.extras.springsecurity3.dialect.processor;
+package org.thymeleaf.extras.springsecurity4.dialect.processor;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,7 @@ import org.thymeleaf.context.IContext;
 import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.dom.Element;
 import org.thymeleaf.exceptions.ConfigurationException;
-import org.thymeleaf.extras.springsecurity3.auth.AuthUtils;
+import org.thymeleaf.extras.springsecurity4.auth.AuthUtils;
 import org.thymeleaf.processor.attr.AbstractConditionalVisibilityAttrProcessor;
 
 /**
@@ -41,13 +41,10 @@ import org.thymeleaf.processor.attr.AbstractConditionalVisibilityAttrProcessor;
  */
 public class AuthorizeAttrProcessor
         extends AbstractConditionalVisibilityAttrProcessor {
-
     
     public static final int ATTR_PRECEDENCE = 300;
     public static final String ATTR_NAME = "authorize";
     public static final String ATTR_NAME_EXPR = "authorize-expr";
-    
-    
     
     
     public AuthorizeAttrProcessor() {
@@ -73,11 +70,11 @@ public class AuthorizeAttrProcessor
             final String attributeName) {
 
         final String attributeValue = element.getAttributeValue(attributeName);
-        
+
         if (attributeValue == null || attributeValue.trim().equals("")) {
             return false;
         }
-        
+
         final IContext context = arguments.getContext();
         if (!(context instanceof IWebContext)) {
             throw new ConfigurationException(
@@ -86,22 +83,19 @@ public class AuthorizeAttrProcessor
                     "web environements.");
         }
         final IWebContext webContext = (IWebContext) context;
-        
+
         final HttpServletRequest request = webContext.getHttpServletRequest();
         final HttpServletResponse response = webContext.getHttpServletResponse();
         final ServletContext servletContext = webContext.getServletContext();
-        
+
         final Authentication authentication = AuthUtils.getAuthenticationObject();
 
         if (authentication == null) {
             return false;
         }
-        
+
         return AuthUtils.authorizeUsingAccessExpression(
                 arguments, attributeValue, authentication, request, response, servletContext);
-        
-    }
-    
 
-    
+    }
 }

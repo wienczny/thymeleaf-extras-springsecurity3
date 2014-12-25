@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.extras.springsecurity3.dialect;
+package org.thymeleaf.extras.springsecurity4.dialect;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -34,12 +34,12 @@ import org.thymeleaf.context.IProcessingContext;
 import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.dialect.IExpressionEnhancingDialect;
-import org.thymeleaf.extras.springsecurity3.auth.AuthUtils;
-import org.thymeleaf.extras.springsecurity3.auth.Authorization;
-import org.thymeleaf.extras.springsecurity3.dialect.processor.AuthenticationAttrProcessor;
-import org.thymeleaf.extras.springsecurity3.dialect.processor.AuthorizeAclAttrProcessor;
-import org.thymeleaf.extras.springsecurity3.dialect.processor.AuthorizeAttrProcessor;
-import org.thymeleaf.extras.springsecurity3.dialect.processor.AuthorizeUrlAttrProcessor;
+import org.thymeleaf.extras.springsecurity4.auth.AuthUtils;
+import org.thymeleaf.extras.springsecurity4.auth.Authorization;
+import org.thymeleaf.extras.springsecurity4.dialect.processor.AuthenticationAttrProcessor;
+import org.thymeleaf.extras.springsecurity4.dialect.processor.AuthorizeAclAttrProcessor;
+import org.thymeleaf.extras.springsecurity4.dialect.processor.AuthorizeAttrProcessor;
+import org.thymeleaf.extras.springsecurity4.dialect.processor.AuthorizeUrlAttrProcessor;
 import org.thymeleaf.processor.IProcessor;
 
 
@@ -63,13 +63,14 @@ public class SpringSecurityDialect
         super();
     }
 
-    
-    
+
+
     public String getPrefix() {
         return DEFAULT_PREFIX;
     }
 
-    
+
+    @Override
     public boolean isLenient() {
         return false;
     }
@@ -90,10 +91,7 @@ public class SpringSecurityDialect
         return processors;
     }
 
-    
 
-    
-    
     public Map<String, Object> getAdditionalExpressionObjects(
             final IProcessingContext processingContext) {
         

@@ -22,10 +22,10 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.thymeleaf.extras</groupId>
-  <artifactId>thymeleaf-extras-springsecurity3</artifactId>
+  <artifactId>thymeleaf-extras-springsecurity4</artifactId>
   <packaging>jar</packaging>
-  <version>2.1.2-SNAPSHOT</version>
-  <name>thymeleaf-extras-springsecurity3</name>
+  <version>3.0.0-SNAPSHOT</version>
+  <name>thymeleaf-extras-springsecurity4</name>
   <url>http://www.thymeleaf.org</url>
 
   <description>XML/XHTML/HTML5 template engine for Java</description>
@@ -99,6 +99,15 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>http://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
   </repositories>
 
 
@@ -108,7 +117,6 @@
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <servlet-api.version>2.5</servlet-api.version>
     <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
-    <springsecurity.version>3.0.7.RELEASE</springsecurity.version>
     <slf4j.version>1.6.6</slf4j.version>
   </properties>
 
@@ -132,14 +140,7 @@
 
     </resources>
 
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
-      </testResource>
-    </testResources>
-
     <plugins>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -231,7 +232,7 @@
                 <descriptor>${basedir}/src/assembly/dist.xml</descriptor>
               </descriptors>
               <appendAssemblyId>true</appendAssemblyId>
-              <finalName>thymeleaf-extras-springsecurity3-${project.version}</finalName>
+              <finalName>thymeleaf-extras-springsecurity4-${project.version}</finalName>
             </configuration>
           </execution>
         </executions>
@@ -258,13 +259,20 @@
         <version>2.1</version>
       </plugin>
 
-
     </plugins>
-
   </build>
 
-
-
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-bom</artifactId>
+        <version>4.0.0.RC1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
 
@@ -275,13 +283,6 @@
       <scope>compile</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring3</artifactId>
-      <version>${thymeleaf.version}</version>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring4</artifactId>
@@ -298,32 +299,51 @@
       <optional>true</optional>
     </dependency>
 
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
-      <version>${springsecurity.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      <version>${springsecurity.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      <version>${springsecurity.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-acl</artifactId>
-      <version>${springsecurity.version}</version>
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>4.1.1.RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>1.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -331,9 +351,12 @@
       <version>${slf4j.version}</version>
       <scope>compile</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
 
   </dependencies>
-
-
 </project>

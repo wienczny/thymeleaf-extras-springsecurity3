@@ -17,12 +17,12 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.extras.springsecurity3.dialect.processor;
+package org.thymeleaf.extras.springsecurity4.dialect.processor;
 
 import org.springframework.security.core.Authentication;
 import org.thymeleaf.Arguments;
 import org.thymeleaf.dom.Element;
-import org.thymeleaf.extras.springsecurity3.auth.AuthUtils;
+import org.thymeleaf.extras.springsecurity4.auth.AuthUtils;
 import org.thymeleaf.processor.attr.AbstractTextChildModifierAttrProcessor;
 
 /**
@@ -38,9 +38,7 @@ public class AuthenticationAttrProcessor
     public static final int ATTR_PRECEDENCE = 1300;
     public static final String ATTR_NAME = "authentication";
     
-    
-    
-    
+
     public AuthenticationAttrProcessor() {
         super(ATTR_NAME);
     }
@@ -53,8 +51,6 @@ public class AuthenticationAttrProcessor
     }
     
 
-    
-    
     @Override
     protected String getText(final Arguments arguments, final Element element,
             final String attributeName) {
@@ -77,7 +73,4 @@ public class AuthenticationAttrProcessor
         return authenticationProperty.toString();
         
     }
-
-
-    
 }

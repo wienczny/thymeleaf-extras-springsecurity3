@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.extras.springsecurity3.dialect.processor;
+package org.thymeleaf.extras.springsecurity4.dialect.processor;
 
 import javax.servlet.ServletContext;
 
@@ -31,8 +31,8 @@ import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.dom.Element;
 import org.thymeleaf.exceptions.ConfigurationException;
 import org.thymeleaf.exceptions.TemplateProcessingException;
-import org.thymeleaf.extras.springsecurity3.auth.AclAuthUtils;
-import org.thymeleaf.extras.springsecurity3.auth.AuthUtils;
+import org.thymeleaf.extras.springsecurity4.auth.AclAuthUtils;
+import org.thymeleaf.extras.springsecurity4.auth.AuthUtils;
 import org.thymeleaf.processor.attr.AbstractConditionalVisibilityAttrProcessor;
 import org.thymeleaf.standard.expression.IStandardExpression;
 import org.thymeleaf.standard.expression.IStandardExpressionParser;
@@ -50,26 +50,22 @@ import org.thymeleaf.standard.expression.TextLiteralExpression;
 public class AuthorizeAclAttrProcessor
         extends AbstractConditionalVisibilityAttrProcessor {
 
-
     public static final int ATTR_PRECEDENCE = 300;
     public static final String ATTR_NAME = "authorize-acl";
 
     
     private static final String VALUE_SEPARATOR = "::";
     
-    
-    
+
     public AuthorizeAclAttrProcessor() {
         super(ATTR_NAME);
     }
 
-    
-    
+
     @Override
     public int getPrecedence() {
         return ATTR_PRECEDENCE;
     }
-
 
 
     @Override
@@ -129,11 +125,8 @@ public class AuthorizeAclAttrProcessor
                 domainObject, applicationContext, permissionsStr, authentication, servletContext);
 
     }
+    
 
-    
-    
-    
-    
     protected static IStandardExpression getExpressionDefaultToLiteral(final IStandardExpressionParser expressionParser,
             final Configuration configuration, final IProcessingContext processingContext, final String input) {
         
